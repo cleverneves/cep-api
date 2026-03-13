@@ -1,0 +1,33 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: cep-api
+  description: API simples criada em FastAPI para consulta de CEP via ViaCEP, utilizando Docker para containerização. Projeto experimental para aprendizado e prática de desenvolvimento backend.
+  tags:
+    - api
+    - rest
+    - python
+    - fastapi
+    - docker
+    - backend
+    - experimental
+
+annotations:
+  github.com/project-slug: cleverneves/cep-api
+
+links:
+  - url: https://github.com/cleverneves/cep-api
+    title: Repositório (Github)
+    icon: github
+  - url: https://localhost:3000/cep-docs/
+    title: API Documentation (Backstage)
+    icon: docs
+  - url: https://localhost:8080/docs
+    title: Swagger UI (FastAPI)
+    icon: docs
+spec:
+  type: service
+  lifecycle: experimental
+  owner: user:default/guest
+  providesApis:
+    - cep-api
