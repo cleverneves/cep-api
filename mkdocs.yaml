@@ -1,0 +1,7 @@
+site_name: 'API CEP'
+nav:
+  - Home: index.md
+  - API Documentation: api-docs.md
+  - Repositório (Github): https://github.com/cleverneves/cep-api
+plugins:
+  - techdocs-core
