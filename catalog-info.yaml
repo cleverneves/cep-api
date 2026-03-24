@@ -26,8 +26,28 @@ links:
     title: Swagger UI (FastAPI)
     icon: docs
 spec:
-  type: service
+  type: external-api
   lifecycle: experimental
   owner: user:default/guest
   providesApis:
     - cep-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: cep-api
+  description: API para consulta de CEP via ViaCEP.
+  tags:
+    - api
+    - rest
+    - python
+    - fastapi
+    - docker
+    - backend
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: user:default/guest
+  system: cep-api
+  definition:
+    $text: ./openapi.yaml

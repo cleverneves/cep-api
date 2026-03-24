@@ -1,0 +1,80 @@
+openapi: 3.0.0
+info:
+  title: CEP API
+  description: API para consulta de CEP via ViaCEP, criada em FastAPI e containerizada com Docker. Projeto experimental para aprendizado e prática de desenvolvimento backend.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Local development server 
+paths:
+  /cep/{cep}:
+    get:
+      summary: Consulta de CEP
+      description: Retorna informações de endereço para um CEP específico usando a API ViaCEP.
+      tags:
+        - CEP
+      parameters:
+        - name: cep
+          in: path
+          required: true
+          description: O CEP a ser consultado (formato: 00000-000 ou 00000000).
+          schema:
+            type: string
+            pattern: '^\d{5}-\d{3}$'
+            example: "01001-000"
+      responses:
+        '200':
+          description: Sucesso - Retorna as informações do endereço para o CEP fornecido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cep:
+                    type: string
+                    example: "01001-000"
+                  logradouro:
+                    type: string
+                    example: "Praça da Sé"
+                  complemento:
+                    type: string
+                    example: "lado ímpar"
+                  bairro:
+                    type: string
+                    example: "Sé"
+                  localidade:
+                    type: string
+                    example: "São Paulo"
+                  uf:
+                    type: string
+                    example: "SP"
+        '400':
+          description: Requisição inválida - O formato do CEP é inválido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Formato de CEP inválido"
+        '404':
+          description: Não encontrado - O CEP não foi encontrado na base ViaCEP.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "CEP não encontrado"
+        '502':
+          description: Erro de gateway - Problema ao se comunicar com a API ViaCEP.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Erro ao consultar a API ViaCEP"
